@@ -1,0 +1,34 @@
+:toc:
+:toclevels: 6
+
+= Deploying A Portainer Container to Manage Docker Clusters
+
+
+toc::[]
+
+== Description
+
+https://www.portainer.io/[Portainer] is an open source, lightweight management UI that allows you to easily manage your Docker containers, images, volumes, and networks from a web interface dashboard.
+
+This document walks you through the setup to get Portainer Container up and running on your Docker Host.
+
+== Requirements
+
+* Docker installed and enabled on your system.
+* Root privileges.
+
+== Install & Configure Portainer 
+
+* Create a Docker Volume for Portainer 
+
+`docker volume create portainer_data`
+
+* Launch and start Portainer Container
+
+NOTE: Docker Image used in this document is https://hub.docker.com/r/portainer/portainer-ce[portainer/portainer-ce]
+
+`docker run -d -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce`
+
+You should be able to access Portainer at: `http:\\localhost:9000` 
+
+NOTE: In case you have an issue connecting Portainer Server to your local docker host, run the above command with `--privileged` flag.
