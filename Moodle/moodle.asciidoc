@@ -45,4 +45,4 @@ NOTE: Once the containers are up and running, you can access moodle at http:\\lo
 NOTE: To deploy Moodle using this docker compose file, clone the repo in your system and navigate to the directory. Run the following command: `docker-compose up` . 
 Make sure you have docker compose installed on your system.
 
-WARNING: Update the values of the following environment variables: `MYSQL_ROOT_PASSWORD` , `MYSQL_PASSWORD` , `MOODLE_DATABASE_PASSWORD` 
+WARNING: Update the values of the following environment variables: `MYSQL_ROOT_PASSWORD` , `MYSQL_PASSWORD` , `MOODLE_DATABASE_PASSWORD`
