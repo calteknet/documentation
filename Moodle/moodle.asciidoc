@@ -1,0 +1,48 @@
+:toc:
+:toclevels: 6
+
+= Deploying A Moodle Container
+
+toc::[]
+
+== Description
+
+https://moodle.org/[Moodle] is an open source, e-learning platform.
+
+This document walks you through the setup to get Moodle Container up and running on your Docker Host.
+
+== Requirements
+
+* Docker installed and enabled on your system.
+* Root privileges.
+
+== Install & Configure Moodle
+
+* Create a docker network
+
+`docker network create moodle-network`
+
+* Create Docker Volumes
+
+To store the MariaDB Data: `docker volume create mariadb-data`
+
+To store the Moodle Data: `docker volume create moodle-data`
+
+* Launch and start Containers
+
+NOTE: MariaDB Docker Image used in this document is https://hub.docker.com/_/mariadb[mariadb]
+
+`docker run -d --name moodledb -v mariadb-data:/var/lib/mysql --network moodle-network -e "MYSQL_ROOT_PASSWORD=rootpassword" -e MYSQL_USER=moodle -e "MYSQL_PASSWORD=rootpassword" -e "MYSQL_DATABASE=moodle" mariadb`
+
+
+NOTE: Moodle Docker Image used in this document is https://hub.docker.com/r/bitnami/moodle[/bitnami/moodle]
+
+`docker run -d --name moodle -p 80:8080 -p 443:8443 -v moodle-data:/bitnami/moodle --network moodle-network -e MOODLE_DATABASE_HOST=moodledb -e MOODLE_DATABASE_USER=moodle -e MOODLE_DATABASE_PASSWORD=rootpassword -e MOODLE_DATABASE_NAME=moodle bitnami/moodle:latest`
+
+
+NOTE: Once the containers are up and running, you can access moodle at http:\\localhost.
+
+NOTE: To deploy Moodle using this docker compose file, clone the repo in your system and navigate to the directory. Run the following command: `docker-compose up` . 
+Make sure you have docker compose installed on your system.
+
+WARNING: Update the values of the environment variables in the following files: `db-vars.env` and `moodle-vars.env`
