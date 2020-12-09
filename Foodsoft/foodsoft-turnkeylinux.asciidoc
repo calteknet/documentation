@@ -35,6 +35,8 @@ On a Terminal:
 
 `docker logs $CID | grep "Random initial root password"`
 
-- Copy the password to ssh into the container to complete the setup of Foodsoft:
+- Run the following command:
 
-`ssh root@CIP`
+`ssh root@$CIP
+
+- Copy the password (in red) from the terminal. Follow the popup screen prompts to complete the setup of FoodSoft
