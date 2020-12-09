@@ -36,4 +36,4 @@ On a Terminal:
 
 - Copy the password to ssh into the container to complete the setup of Moodle:
 
-`ssh root@CIP`
+`ssh root@$CIP`
