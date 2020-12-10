@@ -1,0 +1,41 @@
+:toc:
+:toclevels: 6
+
+= Deploying A Moodle Container Based on Turnkey Linux Image
+
+toc::[]
+
+== Description
+
+https://moodle.org/[Moodle] is an open source, e-learning platform.
+
+This document walks you through the setup to get Moodle Container up and running on your Docker Host.
+
+== Requirements
+
+* Docker installed and enabled on your system.
+* Root privileges.
+
+== Deploy & Configure Moodle
+
+Moodle Docker image maintained by https://hub.docker.com/r/turnkeylinux/moodle[turnkeylinux] has both Moodle files and the database.
+
+On a Terminal:
+
+- Start a Docker container in an interactive mode to setup the required passwords:
+
+`CID=$(docker run -i -t -d turnkeylinux/moodle)`
+
+- Get the IP address of the running container:
+
+`CIP=$(docker inspect --format='{{.NetworkSettings.IPAddress}}' $CID)`
+
+- When Turnkeylinux container starts up, a Password for the root user would be generated. Run the following command to get the root passowrd:
+
+`docker logs $CID | grep "Random initial root password"`
+
+- Run the following command:
+
+`ssh root@$CIP
+
+- Copy the password (in red) from the terminal. Follow the popup screen prompts to complete the setup of Moodle
