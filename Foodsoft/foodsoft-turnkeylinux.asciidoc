@@ -1,0 +1,42 @@
+:toc:
+:toclevels: 6
+
+= Deploying A Foodsoft Container Based on Turnkey Linux Image
+
+toc::[]
+
+== Description
+
+Foodsoft is a web-based software to manage a non-profit food cooperative (product catalog, ordering, accounting, job scheduling)
+
+
+This document walks you through the setup to get Foodsoft Container up and running on your Docker Host.
+
+== Requirements
+
+* Docker installed and enabled on your system.
+* Root privileges.
+
+== Deploy & Configure Foodsoft
+
+Foodsoft Docker image maintained by https://hub.docker.com/r/turnkeylinux/foodsoft[turnkeylinux].
+
+On a Terminal:
+
+- Start a Docker container in an interactive mode to setup the required passwords:
+
+`CID=$(docker run -i -t -d turnkeylinux/foodsoft)`
+
+- Get the IP address of the running container:
+
+`CIP=$(docker inspect --format='{{.NetworkSettings.IPAddress}}' $CID)`
+
+- When Turnkeylinux container starts up, a Password for the root user would be generated. Run the following command to get the root passowrd:
+
+`docker logs $CID | grep "Random initial root password"`
+
+- Run the following command:
+
+`ssh root@$CIP
+
+- Copy the password (in red) from the terminal. Follow the popup screen prompts to complete the setup of FoodSoft
